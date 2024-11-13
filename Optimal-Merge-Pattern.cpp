@@ -4,41 +4,48 @@
 
 using namespace std;
 
-// Function to find the optimal merge pattern
-int optimalMergePattern(vector<int>& files) {
-    // Create a priority queue (min-heap)
+int optimalmergepattern (vector<int>& files){
+    
+    // initiated priority_queue 
     priority_queue<int, vector<int>, greater<int>> minHeap;
-
-    // Insert all file sizes into the min-heap
-    for (int file : files)
+    
+    
+    // this will automatically add files in ascending order
+    for( int file : files){
         minHeap.push(file);
-
-    int totalCost = 0;
-
-    // Repeat the process until there is only one file left
-    while (minHeap.size() > 1) {
-        // Extract the two smallest files
+    }
+    
+    // initiated totalcost=0
+    int totalcost=0;
+    
+    //at last size of minHeap will be zero when final output will be presented
+    while(minHeap.size()>1){
+        
+        //selected 1st and 2nd element of minHeap
         int first = minHeap.top();
         minHeap.pop();
         int second = minHeap.top();
         minHeap.pop();
-
-        // Merge them and calculate the cost
-        int mergeCost = first + second;
-        totalCost += mergeCost;
-
-        // Push the merged file back into the heap
-        minHeap.push(mergeCost);
+        
+        //initiated mergecost as the sum of 1st and 2nd element of minHeap
+        int mergecost= first + second;
+        
+        //totalcost calculated by using mergecost
+        totalcost = totalcost + mergecost;
+        
+        //laterly added mergecost back to minHeap
+        minHeap.push(mergecost);
     }
-
-    return totalCost;
+    
+    //returned totalcost
+    return totalcost;
 }
 
-int main() {
-    vector<int> files = {4, 3, 2, 6};  // Example file sizes
-
-    int minCost = optimalMergePattern(files);
-    cout << "Minimum cost to merge files: " << minCost << endl;
-
+int main(){
+    vector<int> files = {2,5,10, 11, 6, 10};
+    
+    int cost = optimalmergepattern(files);
+    cout<< "Minimum cost to merge files is: "<< cost << endl;
+    
     return 0;
 }
