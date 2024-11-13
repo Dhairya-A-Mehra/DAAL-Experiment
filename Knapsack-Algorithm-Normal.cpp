@@ -4,7 +4,7 @@ using namespace std;
 int knapsack(int W, int wt[], int val[], int n){
     
     // check if knapsack is empty then val[] == 0
-    if(n == 0){
+    if(n == 0 || W == 0){
         return 0;
     }
     
